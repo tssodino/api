@@ -21,9 +21,8 @@ function Api:Check(msg)
         end
     end
 
-    local pad = (#binary % 6)
-    if pad ~= 0 then
-        binary = binary .. string.rep("0", 6 - pad)
+    while #binary % 6 ~= 0 do
+        binary = binary .. "0"
     end
 
     local encoded = ""
