@@ -1,0 +1,16 @@
+local Api = {}
+
+function Api:Check(msg)
+    local ascii = {}
+
+    for i = 1, #msg do
+        ascii[#ascii + 1] = string.byte(msg, i)
+    end
+
+    local joined = table.concat(ascii, "")
+    local encoded = game:GetService("HttpService"):Base64Encode(joined)
+
+    return encoded:gsub("=", "")
+end
+
+return Api
