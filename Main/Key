@@ -7,7 +7,7 @@ local Keys = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieSc
 local GlobalKeys = {}
 
 for _, v in pairs(Keys) do
-    table.insert(GlobalKeys, tostring(EncodeApi:Check(v)))
+    table.insert(GlobalKeys, EncodeApi:Check(tostring(v)))
 end
 
 Api.VaildKey = false
