@@ -1,4 +1,5 @@
 local Api = {}
+-- // Readed the base64 encode from roblox doc
 
 function Api:Check(msg)
     local ascii = {}
@@ -8,9 +9,11 @@ function Api:Check(msg)
     end
 
     local joined = table.concat(ascii, "")
-    local encoded = game:GetService("HttpService"):Base64Encode(joined)
 
-    return encoded:gsub("=", "")
+    local buffer = buffer.fromstring(joined)
+    local encoded = game:GetService("EncodingService"):Base64Encode(buffer)
+
+    return buffer.tostring(encoded):gsub("=", "")
 end
 
 return Api
