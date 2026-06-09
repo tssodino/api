@@ -1,0 +1,18 @@
+local Api = {}
+
+local EncodeApi = loadstring(game:HttpGet("https://raw.githubusercontent.com/tssodino/api/refs/heads/main/Main/test"))()
+
+local Keys = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieScript/api/refs/heads/main/3/3"))()
+
+local EncodedKey = EncodeApi:Check(script_key)
+
+Api.VaildKey = false
+
+for _, v in pairs(Keys) do
+    if v == EncodedKey then
+        Api.VaildKey = true
+        break
+    end
+end
+
+return Api.VaildKey
