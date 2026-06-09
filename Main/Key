@@ -1,4 +1,5 @@
 local Api = {}
+-- // Thanks to the people who helped
 
 local EncodeApi = loadstring(game:HttpGet("https://raw.githubusercontent.com/tssodino/api/refs/heads/main/Main/test"))()
 local Keys = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieScript/api/refs/heads/main/3/3"))()
@@ -6,7 +7,7 @@ local Keys = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieSc
 local GlobalKeys = {}
 
 for _, v in pairs(Keys) do
-    table.insert(GlobalKeys, EncodeApi:Check(v))
+    table.insert(GlobalKeys, tostring(EncodeApi:Check(v)))
 end
 
 Api.VaildKey = false
