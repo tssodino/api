@@ -1,51 +1,18 @@
 local Api = {}
 -- // Thanks to the person who helped me
 
-local b64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-
 function Api:Check(msg)
-    local bytes = {}
-
     msg = tostring(msg)
 
+    local ascii = {}
+
     for i = 1, #msg do
-        bytes[#bytes + 1] = string.byte(msg, i)
+        ascii[#ascii + 1] = string.byte(msg:sub(i, i))
     end
 
-    local binary = ""
+    local joined = table.concat(ascii, "")
 
-    for i = 1, #bytes do
-        local b = bytes[i]
-        for j = 7, 0, -1 do
-            binary = binary .. ((bit32.band(b, bit32.lshift(1, j)) ~= 0) and "1" or "0")
-        end
-    end
-
-    while #binary % 6 ~= 0 do
-        binary = binary .. "0"
-    end
-
-    local encoded = ""
-
-    for i = 1, #binary, 6 do
-        local chunk = binary:sub(i, i + 5)
-        local index = 0
-
-        for j = 1, 6 do
-            if chunk:sub(j, j) == "1" then
-                index = index + bit32.lshift(1, 6 - j)
-            end
-        end
-
-        encoded = encoded .. b64chars:sub(index + 1, index + 1)
-    end
-
-    local mod = #bytes % 3
-    if mod == 1 then
-        encoded = encoded .. "=="
-    elseif mod == 2 then
-        encoded = encoded .. "="
-    end
+    local encoded = game:GetService("HttpService"):Base64Encode(joined)
 
     return encoded:gsub("=", "")
 end
