@@ -6,6 +6,8 @@ local b64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
 function Api:Check(msg)
     local bytes = {}
 
+    msg = tostring(msg)
+
     for i = 1, #msg do
         bytes[#bytes + 1] = string.byte(msg, i)
     end
